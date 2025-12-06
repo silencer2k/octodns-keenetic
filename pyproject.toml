@@ -1,0 +1,9 @@
+[tool.black]
+line-length=80
+
+[tool.isort]
+profile="black"
+line_length=80
+sections="FUTURE,STDLIB,THIRDPARTY,OCTODNS,FIRSTPARTY,LOCALFOLDER"
+known_first_party="octodns_keenetic"
+known_octodns="octodns"

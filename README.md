@@ -1,2 +1,1 @@
-# octodns-keenetic
-Keenetic DNS proxy provider for octoDNS
+## Keenetic DNS proxy provider for octoDNS
