@@ -3,11 +3,11 @@
 from setuptools import find_packages, setup
 
 
-def descriptions():
+def readme():
     with open("README.md") as fh:
-        ret = fh.read()
-        first = ret.split("\n", 1)[0].lstrip("#").strip()
-        return first, ret
+        long_desc = fh.read()
+        desc = long_desc.split("\n", 1)[0].lstrip("#").strip()
+        return desc, long_desc
 
 
 def version():
@@ -18,14 +18,14 @@ def version():
     return "unknown"
 
 
-description, long_description = descriptions()
+desc, long_desc = readme()
 
 tests_require = ("pytest", "pytest-cov", "pytest-network", "requests_mock")
 
 setup(
     author="Aleksandr Aleshin",
     author_email="silencer2k@gmail.com",
-    description=description,
+    description=desc,
     extras_require={
         "dev": tests_require
         + (
@@ -49,11 +49,11 @@ setup(
         "requests>=2.27.0",
     ),
     license="MIT",
-    long_description=long_description,
+    long_description=long_desc,
     long_description_content_type="text/markdown",
     name="octodns-keenetic",
     packages=find_packages(),
-    python_requires=">=3.10",
+    python_requires=">=3.9",
     tests_require=tests_require,
     url="https://github.com/silencer2k/octodns-keenetic",
     version=version(),
