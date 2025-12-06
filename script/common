@@ -1,0 +1,23 @@
+BASE_PATH="$(dirname "$SCRIPT_PATH")"
+
+set -e
+
+cd "$BASE_PATH"
+
+if [ -z "$VENV_NAME" ]; then
+    VENV_NAME="$BASE_PATH/env"
+fi
+
+ACTIVATE="$VENV_NAME/bin/activate"
+if [ ! -f "$ACTIVATE" ]; then
+    echo "$ACTIVATE does not exist" >&2
+    exit 1
+fi
+
+source "$ACTIVATE"
+
+SOURCES="$(find *.py octodns_keenetic -name "*.py")"
+if [ -n "$DEBUG" ]; then
+    echo "source files:"
+    echo "$SOURCES"
+fi

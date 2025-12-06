@@ -1,0 +1,22 @@
+#!/bin/bash
+
+SCRIPT_PATH="$(dirname "$(readlink -f "$0")")"
+
+source "$SCRIPT_PATH/common"
+
+PYPIRC="$HOME/.pypirc"
+if [ ! -e "$PYPIRC" ]; then
+    echo "$PYPIRC does not exist" >&2
+    exit 1
+fi
+
+VERSION="$(grep "^__version__" "octodns_keenetic/__init__.py" | sed -e "s/.* = \"//" -e "s/\"$//")"
+if [ -n "$DEBUG" ]; then
+    echo "version: $VERSION"
+fi
+
+python -m build --sdist --wheel
+
+twine check dist/*$VERSION.tar.gz dist/*$VERSION*.whl
+
+echo "upload cmd: twine upload dist/*$VERSION.tar.gz dist/*$VERSION*.whl"
